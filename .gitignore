@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environments
+venv/
+.venv/
+
+# Env / secrets
+.env
+
+# Test & load test reports
+.pytest_cache/
+.coverage
+load_tests/*.html
+load_tests/*.csv
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
