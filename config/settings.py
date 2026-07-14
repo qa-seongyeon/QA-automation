@@ -16,6 +16,7 @@ API_BASE_URL = f"{BASE_URL}/api"
 # 테스트 계정 정보 (.env 파일에서 로드)
 TEST_EMAIL_VALID = os.environ.get("TEST_EMAIL_VALID", "changeme@example.com")
 TEST_PASSWORD_VALID = os.environ.get("TEST_PASSWORD_VALID", "changeme")
+TEST_USERNAME = os.environ.get("TEST_USERNAME", "changeme")
 
 # 로그인 실패 케이스 검증용 (미가입 이메일)
 TEST_EMAIL_INVALID = os.environ.get("TEST_EMAIL_INVALID", "invalid@example.com")
