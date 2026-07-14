@@ -56,7 +56,6 @@ LOGIN_FAILURE_CASES = [
 ]
 
 
-@pytest.mark.regression
 @pytest.mark.parametrize(
     "email, password, validation_type, invalid_field, validity_state",
     LOGIN_FAILURE_CASES,
@@ -85,7 +84,7 @@ def test_login_failure(page: Page, email, password, validation_type, invalid_fie
     expect(login_page.login_error_msg).not_to_be_visible()
 
 
-@pytest.mark.regression
+@pytest.mark.smoke
 def test_login_success(page: Page):
     """
     LOGIN-TC-008: 미로그인 상태에서 로그인 성공 시나리오 검증
