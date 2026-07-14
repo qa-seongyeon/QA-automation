@@ -1,4 +1,5 @@
 from playwright.sync_api import Page, expect
+from config import settings
 
 class LoginPage:
     def __init__(self, page: Page):
@@ -25,4 +26,8 @@ class LoginPage:
         self.login_email.fill(email)
         self.login_password.fill(password)
         self.login_btn.click()
- 
+
+# 로그인 성공 후 메인페이지 이동 및 로그인 상태 노출 검증
+    def assert_login_success(self, username: str):
+        expect(self.page).to_have_url(f"{settings.BASE_URL}/")
+        expect(self.page.get_by_text(f"Logged in as {username}")).to_be_visible()
