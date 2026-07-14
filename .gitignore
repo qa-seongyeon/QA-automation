@@ -14,8 +14,11 @@ venv/
 .coverage
 load_tests/*.html
 load_tests/*.csv
+reports/allure-results/
+reports/allure-report/
 
 # IDE / OS
 .vscode/
 .idea/
+.claude/
 .DS_Store
