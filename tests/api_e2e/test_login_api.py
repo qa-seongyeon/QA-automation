@@ -1,3 +1,4 @@
+import pytest
 from playwright.sync_api import APIRequestContext
 
 from api import login_api
@@ -36,7 +37,7 @@ def test_signup_and_login_response(request_context: APIRequestContext, account_d
     assert user["city"] == account_data["city"]
     assert user["zipcode"] == account_data["zipcode"]
 
-
+@pytest.mark.smoke
 def test_update_account_response(request_context: APIRequestContext, account_data):
     """
     LOGIN-API-TS-002: 계정 정보 변경에 따른 응답 검증

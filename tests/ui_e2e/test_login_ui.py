@@ -8,7 +8,7 @@ LOGIN_URL = f"{settings.BASE_URL}/login"
 CART_URL = f"{settings.BASE_URL}/view_cart"
 ADD_TO_CART_URL = f"{settings.BASE_URL}/add_to_cart/1"
 
-
+@pytest.mark.smoke
 def test_login_from_main_page(page: Page):
     """
     TS-LOGIN-001: 메인페이지 → 로그인 → 메인페이지 여정 검증
