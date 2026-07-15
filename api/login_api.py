@@ -2,6 +2,10 @@ from playwright.sync_api import APIRequestContext, APIResponse
 
 from config.settings import API_BASE_URL
 
+#
+# API 호출 로직을 함수 단위로 설계하여
+# 앤드포인트/인증 방식 변경 시 해당 함수만 수정하면 되도록 tests/api_e2e 와 분리
+#
 
 def create_account(request_context: APIRequestContext, **account_data) -> APIResponse:
     """POST /createAccount - 회원가입"""
