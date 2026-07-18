@@ -4,8 +4,24 @@ import pytest
 from playwright.sync_api import Playwright
 
 from api import login_api
+from utils.allure_utils import attach_screenshot
+from utils.data_utils import build_account_payload
 
 AD_PATTERN = re.compile(r"(doubleclick|googlesyndication|google_vignette|adservice\.google)")
+
+
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    """
+    테스트 실패 시(call 단계 한정) page fixture가 있으면 스크린샷을 Allure에 첨부.
+    """
+    outcome = yield
+    report = outcome.get_result()
+
+    if report.when == "call" and report.failed:
+        page = item.funcargs.get("page")
+        if page:
+            attach_screenshot(page, name=f"failure_{item.name}")
 
 
 @pytest.fixture
@@ -21,29 +37,6 @@ def request_context(playwright: Playwright):
     request_context = playwright.request.new_context()
     yield request_context
     request_context.dispose()
-
-
-def build_account_payload(email: str, password: str) -> dict:
-    """createAccount/updateAccount API가 요구하는 공통 계정 payload"""
-    return {
-        "name": "QA Tester",
-        "email": email,
-        "password": password,
-        "title": "Mr",
-        "birth_date": "1",
-        "birth_month": "1",
-        "birth_year": "1990",
-        "firstname": "QA",
-        "lastname": "Tester",
-        "company": "QA Corp",
-        "address1": "123 Test St",
-        "address2": "",
-        "country": "United States",
-        "zipcode": "12345",
-        "state": "California",
-        "city": "Los Angeles",
-        "mobile_number": "01000000000",
-    }
 
 
 @pytest.fixture
