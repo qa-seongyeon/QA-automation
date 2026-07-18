@@ -1,0 +1,27 @@
+name: Smoke Tests
+
+on:
+  push:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          playwright install --with-deps chromium
+
+      - name: Run smoke tests
+        env:
+          TEST_ENV: ${{ vars.TEST_ENV }}
+          TEST_EMAIL_VALID: ${{ secrets.TEST_EMAIL_VALID }}
+          TEST_PASSWORD_VALID: ${{ secrets.TEST_PASSWORD_VALID }}
+          TEST_USERNAME: ${{ secrets.TEST_USERNAME }}
+        run: pytest -m smoke
