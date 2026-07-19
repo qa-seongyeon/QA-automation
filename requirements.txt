@@ -1,5 +1,6 @@
 pytest
 playwright
+pytest-playwright
 python-dotenv
 allure-pytest
 locust
