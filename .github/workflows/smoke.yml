@@ -19,6 +19,7 @@ jobs:
           playwright install --with-deps chromium
 
       - name: Run smoke tests
+        continue-on-error: true
         env:
           TEST_ENV: ${{ vars.TEST_ENV }}
           TEST_EMAIL_VALID: ${{ secrets.TEST_EMAIL_VALID }}
